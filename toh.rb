@@ -1,7 +1,7 @@
 require "pry"
 require 'byebug'
 
-class T
+class TowerOfHanoi
   
   def initialize(tower_height)
     @towers=tower_height
@@ -33,6 +33,7 @@ class T
     movement=[]
     
     while !game_over?(movement,rods)
+      render(rods)
       movement=ask
 
       if movement=="q"
@@ -40,9 +41,11 @@ class T
       end
       
       move(movement,rods)
+      
 
       if victorious?(rods)
-        puts "You won!"
+        puts "Congratulations! You won!"
+        render(rods)
       end
     end
   end
@@ -67,8 +70,28 @@ class T
     movement[0].between?(0,4) && movement[1].between?(0,4) ? true : false
   end
 
-  def render
+  def render(rods)
     #prints out the current state of the game board in between turns
+    # towers=5 base=@towers+1 space 6*3 spaces
+    #rods.values.each_with_index do |arr, index|
+    
+      for index in Array(1..@towers).reverse
+        rods.keys.each do |key|
+          if rods[key][index]!=nil 
+            print "#{" "*3}#{"O"*rods[key][index]+" "*(@towers+3-rods[key][index])}" 
+          else
+            print "#{" "*(3)+" "*(@towers+3)}" 
+          end
+        end
+
+        puts " "
+      end
+
+    rods.keys.each do |key|
+      print "#{" "*(3)}#{key}#{"-"*(@towers+2)}"
+    end
+
+    puts
   end
 
   def move (movement,rods)
