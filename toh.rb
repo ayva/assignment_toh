@@ -15,7 +15,7 @@ class TowerOfHanoi
     puts "in the format [1,3]. Enter 'q' to quit."
     puts "Current Board:"
 
-    #render(default)
+    
     
     game_loop
     
@@ -71,9 +71,7 @@ class TowerOfHanoi
   end
 
   def render(rods)
-    #prints out the current state of the game board in between turns
-    # towers=5 base=@towers+1 space 6*3 spaces
-    #rods.values.each_with_index do |arr, index|
+    
     
       for index in Array(1..@towers).reverse
         rods.keys.each do |key|
